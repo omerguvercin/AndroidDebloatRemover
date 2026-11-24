@@ -1,0 +1,26 @@
+name: Yayinla (GitHub Release)
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Depoyu indir
+        uses: actions/checkout@v4
+
+      - name: GitHub Release olustur ve paketi yukle
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          gh release create "$TAG_NAME" \
+            "Android-Universal-Debloat.ps1" \
+            --title "Android Universal Debloat & Optimizasyon Aracı $TAG_NAME" \
+            --notes-file RELEASE_NOTES.md

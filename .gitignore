@@ -1,0 +1,5 @@
+AndroidDebloatData/
+adb/
+platform-tools/
+*.log
+*.zip
