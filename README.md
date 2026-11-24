@@ -1,4 +1,4 @@
-# Android Universal Debloat & Sistem Optimizasyon Aracı (v2.0.0)
+# Android Universal Debloat & Sistem Optimizasyon Aracı (v2.0.1)
 
 Tüm Android cihazlar ve markalar (**AOSP, Samsung One UI, Xiaomi / Redmi / POCO (MIUI & HyperOS), OPPO / Realme / OnePlus, Huawei / Honor, Motorola, Vivo, Transsion, Sony, Asus, Nokia**) için geliştirilmiş, **tek dosya** halinde çalışan, **yedeklemeli ve geri yüklemeli** evrensel PowerShell debloat & optimizasyon aracıdır.
 

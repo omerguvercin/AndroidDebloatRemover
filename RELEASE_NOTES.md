@@ -1,19 +1,22 @@
-## Android Universal Debloat & Sistem Optimizasyon Aracı v2.0.0
+## Android Universal Debloat & Sistem Optimizasyon Aracı v2.0.1
 
-Tüm Android cihazlar ve markalar (**AOSP, Samsung, Xiaomi/MIUI/HyperOS, OPPO/Realme/OnePlus, Huawei/Honor, Motorola, Vivo, Transsion, Sony, Asus, Nokia**) için tek dosya halinde çalışan evrensel debloat ve sistem optimizasyon aracıdır.
+Bu sürüm hata düzeltmeleri, CLI `-DryRun` güvenlik iyileştirmeleri ve en güncel gömülü Google Platform-Tools (`ADB`) paketini içerir.
 
-### Yenilikler ve Özellikler
+### v2.0.1 Değişiklikler & Düzeltmeler
 
-- **Akıllı ADB Yönetimi (Online + Offline):** İnternet varsa Google'ın resmi sunucusundan en güncel Platform-Tools (`adb.exe`) sürümünü otomatik indirip kurar; internet yoksa betiğin içine gömülü olan offline ADB'yi çıkartarak çalışır.
-- **Tekil Veri Klasörü:** ADB dosyaları, yedekler, loglar ve whitelist dosyası yalnızca tek bir `AndroidDebloatData\` klasöründe toplanır.
-- **Cihaz Bazlı Otomatik Yedekleme ve Geri Yükleme (`[R]`):** Her işlem öncesi `<Marka>_<Model>_<SeriNo>_<Tarih>_backup.json` yedeği alır; kaldırılan paketleri ve orijinal sistem ayarlarını tek tıkla geri yükleyebilirsiniz.
-- **Güvenli Katalog Revizyonu (370 Paket):**
-  - **Google Drive**, **Android Auto**, **Galaxy Wearable**, **SmartThings** ve **Samsung Health** gibi kritik uygulamalar yalnızca **Seviye 3 (Agresif / Hard)** katmanına taşındı.
-  - Bootloop riski taşıyan `com.miui.cloudservice` otomatik listeden çıkarıldı.
-- **Seçmeli Private DNS (`[4]`):** AdGuard DNS, AdGuard Aile, Cloudflare, Quad9, NextDNS veya özel DNS sunucusu isteğe bağlı olarak ayarlanabilir.
-- **Görsel Paket Seçici (`[G]`):** `Out-GridView` ile eşleşen paketleri açıklamalarıyla birlikte görsel listeden seçerek işlem yapabilirsiniz.
-- **Manuel Paket Yöneticisi & Whitelist (`[M]`):** Kurulu paketlerde arama, tekil kaldırma/dondurma/geri yükleme ve hariç tutma listesi.
-- **Kablosuz ADB (`[9]`) & CLI Modu:** Android 11+ kablosuz hata ayıklama ve komut satırı parametre desteği (`-Tier`, `-DryRun`, `-Optimize`, `-PrivateDns`, `-RestoreBackup`, `-NonInteractive`).
+- **Güncel Gömülü ADB (`37.0.3-16887417`):** Çevrimdışı yedek olarak betiğe gömülü Google Platform-Tools (`adb.exe`, `AdbWinApi.dll`, `AdbWinUsbApi.dll`) sürümü `35.0.2` → `37.0.3-16887417` sürümüne güncellendi.
+- **`-DryRun` Güvenlik & Seviye Düzeltmesi:**
+  - `-Tier <1|2|3> -DryRun` artık yalnızca seçilen seviyeye kadar olan paketleri önizler.
+  - `-DryRun` ile birlikte `-Optimize`, `-PrivateDns` veya `-RestoreBackup` verildiğinde cihazda hiçbir değişiklik yapılmaması garanti altına alındı.
+- **Fallback Paket Takibi Düzeltildi:** Kaldırılamayıp otomatik fallback ile devre dışı bırakılan (`pm disable-user`) paketlerin sonraki taramalarda tekrar hedef olarak görünmesi engellendi.
+- **Sistem Ayarı & Geri Yükleme Doğrulaması:**
+  - `Set-AndroidSetting` artık yalnızca başarıyla uygulanan ayarları yedek kaydına ekler.
+  - `Set-PrivateDnsConfig` başarısız olduğunda hatalı `[OK]` mesajı ve boş yedek dosyası oluşturmaz.
+  - `Restore-DeviceBackup` içindeki `settings delete` işlemleri için hata kontrolü ve özet raporu eklendi.
+- **Varsayılan Ayar & Whitelist İyileştirmeleri:**
+  - `Reset-SystemOptimizations` içinde `sys_traced` varsayılan değeri `"0"` olarak düzeltildi.
+  - Whitelist'e aynı paketin mükerrer eklenmesi engellendi ve manuel paket etkinleştirme (`[E]`) loglama/hata kontrolü eklendi.
+  - Çevrimiçi ADB indirmesinde yalnızca güvenli `TLS 1.2` protokolü kullanılacak şekilde güncellendi.
 
 ### Hızlı Başlangıç
 
